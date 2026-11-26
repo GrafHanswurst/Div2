@@ -103,7 +103,12 @@ def _rows(block: list[str]) -> list[list[str]]:
 
 def _clean_row(row: list[str]) -> tuple[str, str, str]:
     """(name, item, kind) from one table row; counts and 'last seen' are dropped."""
-    cells = [c for c in row if not _ROW_END.search(c) and not re.fullmatch(r"[\d\s×x]+", c)]
+    cells = [
+        c for c in row
+        if not _ROW_END.search(c)
+        and not re.fullmatch(r"[\d\s×x]+", c)
+        and re.search(r"[A-Za-z]", c)  # drop badges like "!" or "·"
+    ]
     name = cells[0] if cells else ""
     rest = cells[1:]
     kind = ""
@@ -138,8 +143,12 @@ def parse(raw_html: str) -> dict:
         if n and i
     ]
 
-    week = re.search(r"Rotation week\s*(.+)", full)
+    # "Rotation week" may be followed by "24 Nov", "–", "30 Nov 2026" as separate nodes.
+    week = re.search(r"Rotation week\s*(.+?\d{4})", " ".join(lines))
     updated = re.search(r"Last updated\s*(.+)", full)
+    if os.environ.get("DRY_RUN", "").lower() == "true":
+        print("Page text, missions section:", missions_block)
+        print("Page text, vendor section:", vendor_block)
     return {
         "missions": missions,
         "caches": caches,
