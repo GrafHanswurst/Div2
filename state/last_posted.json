@@ -1,0 +1,43 @@
+{
+  "posted_on": "2026-11-26",
+  "posted_at": "2026-11-26T18:01+01:00",
+  "signature": {
+    "missions": [
+      {
+        "mission": "The Pentagon",
+        "drop": "Gila Guard",
+        "type": ""
+      },
+      {
+        "mission": "DARPA Research Labs",
+        "drop": "Tipping Scales",
+        "type": ""
+      },
+      {
+        "mission": "District Union Arena",
+        "drop": "Grupo Sombra S.A.",
+        "type": ""
+      },
+      {
+        "mission": "Roosevelt Island",
+        "drop": "Cavalier",
+        "type": ""
+      },
+      {
+        "mission": "Space Administration HQ",
+        "drop": "Habsburg Guard",
+        "type": ""
+      }
+    ],
+    "caches": [
+      {
+        "cache": "Prototype Gear Cache",
+        "item": "Backpacks"
+      },
+      {
+        "cache": "Prototype Weapon Cache",
+        "item": "MMRs"
+      }
+    ]
+  }
+}
