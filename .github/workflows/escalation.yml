@@ -1,0 +1,54 @@
+name: Escalation daily post
+
+on:
+  schedule:
+    # GitHub cron is UTC. Every 15 min from 08:00 to 15:45 UTC covers
+    # 10:00-16:59 Berlin in summer (CEST) and 09:00-16:45 in winter (CET).
+    # escalation.py itself skips anything before 10:00 Berlin, so the start
+    # time is right all year without editing this file.
+    - cron: "*/15 8-15 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only print what would be posted"
+        type: boolean
+        default: true
+      force:
+        description: "Ignore the time window and the 'same as last post' check"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # to commit state/last_posted.json
+
+concurrency:
+  group: escalation
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check ProtoTrack and post if changed
+        id: run
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+          FORCE: ${{ inputs.force || 'false' }}
+        run: python escalation.py
+
+      - name: Save state
+        if: steps.run.outputs.state_changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/last_posted.json
+          git commit -m "Posted Escalation for $(TZ=Europe/Berlin date +%F)"
+          git push
