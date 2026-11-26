@@ -51,4 +51,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add state/last_posted.json
           git commit -m "Posted Escalation for $(TZ=Europe/Berlin date +%F)"
+          # If another run pushed in the meantime, take its commit first.
+          git pull --rebase -X theirs origin main
           git push
