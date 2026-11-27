@@ -90,14 +90,30 @@ _SET_TYPE = re.compile(r"^\(?\s*(brand set|gear set|exotic|named item|weapon|gea
 
 
 def _rows(block: list[str]) -> list[list[str]]:
-    rows, current = [], []
+    """Split a section into rows.
+
+    Each row ends with its "Last seen" value: the line after a "Last seen"
+    label (e.g. "7 days ago" or "No earlier record"), or, if the page has no
+    labels, a line that looks like a last-seen value. That value is dropped.
+    """
+    rows, current, after_label = [], [], False
     for line in block:
+        if after_label:
+            rows.append(current)
+            current, after_label = [], False
+            continue
+        if re.fullmatch(r"last seen:?", line, re.I):
+            after_label = True
+            continue
         if _NOISE.match(line):
             continue
-        current.append(line)
         if _ROW_END.search(line):
             rows.append(current)
             current = []
+            continue
+        current.append(line)
+    if current and any(re.search(r"[A-Za-z]", c) for c in current):
+        rows.append(current)
     return rows
 
 
@@ -105,8 +121,7 @@ def _clean_row(row: list[str]) -> tuple[str, str, str]:
     """(name, item, kind) from one table row; counts and 'last seen' are dropped."""
     cells = [
         c for c in row
-        if not _ROW_END.search(c)
-        and not re.fullmatch(r"[\d\s×x]+", c)
+        if not re.fullmatch(r"[\d\s×x]+(times?)?", c, re.I)
         and re.search(r"[A-Za-z]", c)  # drop badges like "!" or "·"
     ]
     name = cells[0] if cells else ""

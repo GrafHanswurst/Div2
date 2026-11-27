@@ -8,7 +8,7 @@ which volunteers fill in a few minutes after the 08:00 UTC reset.
 
 ## How it works
 
-- GitHub Actions runs `escalation.py` every 15 minutes (cron `*/15 8-15 * * *`, UTC).
+- GitHub Actions runs `escalation.py` every 15 minutes (cron `7,22,37,52 8-15 * * *`, UTC; off the busy quarter-hours, because GitHub skips or delays many runs at :00/:15/:30/:45).
 - The script does nothing before **10:00 Berlin time**, so the start time is right in summer and winter.
 - It reads the page and compares missions, drops and caches with the last post
   (`state/last_posted.json`). If they changed, it posts and commits the new state.
