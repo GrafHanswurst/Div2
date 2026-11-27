@@ -2,11 +2,11 @@ name: Escalation daily post
 
 on:
   schedule:
-    # GitHub cron is UTC. Every 15 min from 08:00 to 15:45 UTC covers
+    # GitHub cron is UTC. Every 15 min (at :07/:22/:37/:52, off the busy quarter-hours) from 08:07 to 15:52 UTC covers
     # 10:00-16:59 Berlin in summer (CEST) and 09:00-16:45 in winter (CET).
     # escalation.py itself skips anything before 10:00 Berlin, so the start
     # time is right all year without editing this file.
-    - cron: "*/15 8-15 * * *"
+    - cron: "7,22,37,52 8-15 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
