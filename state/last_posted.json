@@ -1,42 +1,42 @@
 {
-  "posted_on": "2026-11-26",
-  "posted_at": "2026-11-26T18:01+01:00",
+  "posted_on": "2026-11-27",
+  "posted_at": "2026-11-27T12:08+01:00",
   "signature": {
     "missions": [
       {
         "mission": "The Pentagon",
-        "drop": "Gila Guard",
+        "drop": "Alps Summit Armaments",
         "type": ""
       },
       {
         "mission": "DARPA Research Labs",
-        "drop": "Tipping Scales",
+        "drop": "Field General",
         "type": ""
       },
       {
         "mission": "District Union Arena",
-        "drop": "Grupo Sombra S.A.",
+        "drop": "Gila Guard",
         "type": ""
       },
       {
         "mission": "Roosevelt Island",
-        "drop": "Cavalier",
+        "drop": "Murakami Industries",
         "type": ""
       },
       {
         "mission": "Space Administration HQ",
-        "drop": "Habsburg Guard",
+        "drop": "Brazos de Arcabuz",
         "type": ""
       }
     ],
     "caches": [
       {
         "cache": "Prototype Gear Cache",
-        "item": "Backpacks"
+        "item": "Masks"
       },
       {
         "cache": "Prototype Weapon Cache",
-        "item": "MMRs"
+        "item": "Pistols"
       }
     ]
   }
