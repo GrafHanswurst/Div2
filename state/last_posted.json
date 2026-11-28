@@ -1,31 +1,31 @@
 {
-  "posted_on": "2026-11-27",
-  "posted_at": "2026-11-27T12:08+01:00",
+  "posted_on": "2026-11-28",
+  "posted_at": "2026-11-28T10:38+01:00",
   "signature": {
     "missions": [
       {
         "mission": "The Pentagon",
-        "drop": "Alps Summit Armaments",
+        "drop": "Refactor",
         "type": ""
       },
       {
         "mission": "DARPA Research Labs",
-        "drop": "Field General",
+        "drop": "Eclipse Protocol",
         "type": ""
       },
       {
         "mission": "District Union Arena",
-        "drop": "Gila Guard",
+        "drop": "Sokolov Concern",
         "type": ""
       },
       {
         "mission": "Roosevelt Island",
-        "drop": "Murakami Industries",
+        "drop": "Hotshot",
         "type": ""
       },
       {
         "mission": "Space Administration HQ",
-        "drop": "Brazos de Arcabuz",
+        "drop": "Petrov Defense Group",
         "type": ""
       }
     ],
@@ -36,7 +36,7 @@
       },
       {
         "cache": "Prototype Weapon Cache",
-        "item": "Pistols"
+        "item": "Shotguns"
       }
     ]
   }
